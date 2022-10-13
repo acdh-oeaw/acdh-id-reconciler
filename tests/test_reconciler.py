@@ -21,6 +21,7 @@ DATA = [
 
 ]
 
+
 class TestTestTest(unittest.TestCase):
     """Tests for `acdh_id_reconciler` package."""
 
