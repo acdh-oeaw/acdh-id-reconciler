@@ -23,3 +23,14 @@ results = gnd_to_geonames(test)
 print(results)
 # {'wikidata': 'http://www.wikidata.org/entity/Q261664', 'gnd': '4010858-2', 'geonames': '2781124'}
 ```
+
+### from GND to WikiData
+
+```python
+from acdh_id_reconciler import gnd_to_wikidata
+
+test = "https://d-nb.info/gnd/4074255-6"
+results = gnd_to_wikidata(test)
+print(results)
+# {'wikidata': 'http://www.wikidata.org/entity/Q41329', 'gnd': '4074255-6'}
+```
