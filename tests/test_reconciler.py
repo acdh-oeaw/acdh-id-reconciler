@@ -92,7 +92,7 @@ class TestTestTest(unittest.TestCase):
         for x in DATA_GND_TO_WIKIDATA:
             result = gnd_to_wikidata(x[0])
             self.assertEqual(result, x[1])
-    
+
     def test_003_geonames_to_wikidata(self):
         for x in DATA_GEONAMES_WIKI:
             result = geonames_to_wikidata(x[0])
