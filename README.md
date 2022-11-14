@@ -34,3 +34,25 @@ results = gnd_to_wikidata(test)
 print(results)
 # {'wikidata': 'http://www.wikidata.org/entity/Q41329', 'gnd': '4074255-6'}
 ```
+
+### from Geonames to WikiData
+
+```python
+from acdh_id_reconciler import geonames_to_wikidata
+
+test = "https://www.geonames.org/2761369"
+results = geonames_to_wikidata(test)
+print(results)
+# {'wikidata': 'http://www.wikidata.org/entity/Q1741', 'geonames': '2761369'}
+```
+
+### from Geonames to GND
+
+```python
+from acdh_id_reconciler import geonames_to_gnd
+
+test = "https://www.geonames.org/2761369"
+results = geonames_to_gnd(test)
+print(results)
+# {'wikidata': 'http://www.wikidata.org/entity/Q1741', 'geonames': '2761369', 'gnd': '4066009-6'}
+```
