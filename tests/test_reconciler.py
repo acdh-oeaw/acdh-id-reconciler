@@ -1,5 +1,5 @@
 import unittest
-from acdh_id_reconciler import gnd_to_geonames, gnd_to_wikidata
+from acdh_id_reconciler import gnd_to_geonames, gnd_to_wikidata, geonames_to_gnd, geonames_to_wikidata
 
 DATA = [
     (
@@ -37,6 +37,42 @@ DATA_GND_TO_WIKIDATA = [
     )
 ]
 
+DATA_GEONAMES_WIKI = [
+    (
+        "https://www.geonames.org/2761369",
+        {
+            'wikidata': 'http://www.wikidata.org/entity/Q1741',
+            'geonames': '2761369',
+        }
+    ),
+    (
+        "https://www.geonames.org/2633352",
+        {
+            'wikidata': 'http://www.wikidata.org/entity/Q42462',
+            'geonames': '2633352',
+        }
+    )
+]
+
+DATA_GEONAMES_GND = [
+    (
+        "https://www.geonames.org/2761369",
+        {
+            'wikidata': 'http://www.wikidata.org/entity/Q1741',
+            'geonames': '2761369',
+            'gnd': '4066009-6'
+        }
+    ),
+    (
+        "https://www.geonames.org/2633352",
+        {
+            'wikidata': 'http://www.wikidata.org/entity/Q42462',
+            'geonames': '2633352',
+            'gnd': '4067205-0'
+        }
+    )
+]
+
 
 class TestTestTest(unittest.TestCase):
     """Tests for `acdh_id_reconciler` package."""
@@ -55,4 +91,14 @@ class TestTestTest(unittest.TestCase):
     def test_002_gnd_to_wikidata(self):
         for x in DATA_GND_TO_WIKIDATA:
             result = gnd_to_wikidata(x[0])
+            self.assertEqual(result, x[1])
+    
+    def test_003_geonames_to_wikidata(self):
+        for x in DATA_GEONAMES_WIKI:
+            result = geonames_to_wikidata(x[0])
+            self.assertEqual(result, x[1])
+
+    def test_004_geonames_to_gnd(self):
+        for x in DATA_GEONAMES_GND:
+            result = geonames_to_gnd(x[0])
             self.assertEqual(result, x[1])

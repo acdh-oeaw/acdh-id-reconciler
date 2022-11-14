@@ -47,19 +47,37 @@ def gnd_to_geonames(gnd, user_agent=USER_AGENT):
     return ids
 
 
-def geonames_to_wikidata(geonames, user_agent=USER_AGENT):
+def geonames_to_gnd(geonames, user_agent=USER_AGENT):
     norm_id = get_norm_id(geonames)
     query = f"""SELECT ?wikidata ?gnd ?geonames
     WHERE
     {{
     ?wikidata wdt:P1566 "{norm_id}".
     ?wikidata wdt:P227 ?gnd .
+    ?wikidata wdt:P1566 ?geonames .
     }}"""
     sparql = SPARQLWrapper(ENDPOINT_URL, agent=user_agent)
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
-    print(results)
+    ids = {
+        key: value['value'] for (key, value) in results["results"]["bindings"][0].items()
+    }
+    return ids
+
+
+def geonames_to_wikidata(geonames, user_agent=USER_AGENT):
+    norm_id = get_norm_id(geonames)
+    query = f"""SELECT ?wikidata ?geonames
+    WHERE
+    {{
+    ?wikidata wdt:P1566 "{norm_id}".
+    ?wikidata wdt:P1566 ?geonames .
+    }}"""
+    sparql = SPARQLWrapper(ENDPOINT_URL, agent=user_agent)
+    sparql.setQuery(query)
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
     ids = {
         key: value['value'] for (key, value) in results["results"]["bindings"][0].items()
     }
