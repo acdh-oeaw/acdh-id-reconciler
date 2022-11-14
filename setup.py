@@ -38,6 +38,6 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/acdh-oeaw/acdh-id-reconciler',
-    version="0.3",
+    version="0.4",
     zip_safe=False,
 )
