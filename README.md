@@ -56,3 +56,18 @@ results = geonames_to_gnd(test)
 print(results)
 # {'wikidata': 'http://www.wikidata.org/entity/Q1741', 'geonames': '2761369', 'gnd': '4066009-6'}
 ```
+
+### from Wikidata to Wikipedia
+
+```python
+from acdh_id_reconciler import wikidata_to_wikipedia
+
+test = "https://www.wikidata.org/wiki/Q1186567/"
+result = wikidata_to_wikipedia(test)
+print(result)
+# 'https://de.wikipedia.org/wiki/Alexandrinski-Theater'
+
+# default language is set to german, can be changed by settings param result e.g. `wiki_lang='enwiki'`
+result = wikidata_to_wikipedia(test, wiki_lang='enwiki')
+print(result)
+# 'https://en.wikipedia.org/wiki/Alexandrinsky_Theatre'
