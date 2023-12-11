@@ -117,7 +117,6 @@ def gnd_to_wikidata_custom(gnd, wiki_property, user_agent=USER_AGENT):
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
-    print(results)
     ids = {
         key: value["value"]
         for (key, value) in results["results"]["bindings"][0].items()
