@@ -35,6 +35,18 @@ print(results)
 # {'wikidata': 'http://www.wikidata.org/entity/Q41329', 'gnd': '4074255-6'}
 ```
 
+### from GND to WikiData plus Custom-ID
+
+```python
+from acdh_id_reconciler import gnd_to_wikidata_custom
+
+test = "https://d-nb.info/gnd/118566512"
+custom = "P21" # https://www.wikidata.org/wiki/Property:P6194
+results = gnd_to_wikidata_custom(test, custom)
+print(results)
+# {'wikidata': 'http://www.wikidata.org/entity/Q44517',  'gnd': '118566512', 'custom': 'http://www.wikidata.org/entity/Q6581097'}
+```
+
 ### from Geonames to WikiData
 
 ```python
