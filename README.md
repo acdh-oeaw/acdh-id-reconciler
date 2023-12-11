@@ -42,7 +42,7 @@ from acdh_id_reconciler import gnd_to_wikidata_custom
 
 test = "https://d-nb.info/gnd/4074255-6"
 custom = "P6194" # https://www.wikidata.org/wiki/Property:P6194
-results = gnd_to_wikidata(test, custom)
+results = gnd_to_wikidata_custom(test, custom)
 print(results)
 # {'wikidata': 'http://www.wikidata.org/entity/Q41329', 'gnd': '4074255-6', 'custom': 'custom-id'}
 ```
