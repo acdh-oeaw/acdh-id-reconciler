@@ -2,6 +2,7 @@ import unittest
 from acdh_id_reconciler import (
     gnd_to_geonames,
     gnd_to_wikidata,
+    gnd_to_wikidata_custom,
     geonames_to_gnd,
     geonames_to_wikidata,
     wikidata_to_wikipedia,
@@ -133,3 +134,9 @@ class TestTestTest(unittest.TestCase):
         for x in WIKIDATA_IDS:
             wikipedia = wikidata_to_wikipedia(x["wikidata"])
             self.assertEqual(wikipedia, x["wikipedia_de"])
+
+    def test_007_wikidata_to_geonames_custom(self):
+        gnd = "https://d-nb.info/gnd/118566512"
+        custom_prop = "P21"
+        results = gnd_to_wikidata_custom(gnd, custom_prop)
+        self.assertEqual(results["custom"], "http://www.wikidata.org/entity/Q6581097")
