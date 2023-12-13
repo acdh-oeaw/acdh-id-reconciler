@@ -109,14 +109,14 @@ def gnd_to_wikidata_custom(gnd, wiki_property, user_agent=USER_AGENT):
     query = f"""SELECT ?wikidata ?gnd ?custom
     WHERE
     {{
-    ?wikidata wdt:P227 "{norm_id}".
+    ?wikidata wdt:P227 "{norm_id}" .
     ?wikidata wdt:P227 ?gnd .
-    ?wikidata wdt:{wiki_property} ?custom .
+    OPTIONAL {{ ?wikidata wdt:{wiki_property} ?custom . }}
     }}"""
     sparql = SPARQLWrapper(ENDPOINT_URL, agent=user_agent)
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)
-    results = sparql.query().convert()
+    results = sparql.queryAndConvert()
     ids = {
         key: value["value"]
         for (key, value) in results["results"]["bindings"][0].items()

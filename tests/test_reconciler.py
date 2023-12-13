@@ -59,6 +59,25 @@ DATA_GND_TO_WIKIDATA = [
     ),
 ]
 
+DATA_GND_TO_WIKIDATA_CUSTOM = [
+    (
+        "https://d-nb.info/gnd/118634712",
+        {
+            "wikidata": "http://www.wikidata.org/entity/Q215747",
+            "gnd": "118634712",
+            "custom": "W/Wolf_Hugo_1860_1903"
+        },
+    ),
+    (
+        "https://d-nb.info/gnd/118634712",
+        {
+            "wikidata": "http://www.wikidata.org/entity/Q215747",
+            "gnd": "118634712",
+            "custom": "W/Wolf_Hugo_1860_1903"
+        },
+    ),
+]
+
 DATA_GEONAMES_WIKI = [
     (
         "https://www.geonames.org/2761369",
@@ -140,3 +159,9 @@ class TestTestTest(unittest.TestCase):
         custom_prop = "P21"
         results = gnd_to_wikidata_custom(gnd, custom_prop)
         self.assertEqual(results["custom"], "http://www.wikidata.org/entity/Q6581097")
+
+    def test_008_gnd_to_wikidata_custom(self):
+        for x in DATA_GND_TO_WIKIDATA_CUSTOM:
+            custom = "P6194"
+            result = gnd_to_wikidata_custom(x[0], custom)
+            self.assertEqual(result, x[1])
