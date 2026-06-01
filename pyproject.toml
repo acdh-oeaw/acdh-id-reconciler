@@ -1,6 +1,6 @@
 [project]
 name = "acdh-id-reconciler"
-version = "0.7.1"
+version = "0.8.0"
 description = "Python package to reconcile GND, GeoNames IDs via WikiData"
 readme = "README.md"
 requires-python = ">=3.11"
