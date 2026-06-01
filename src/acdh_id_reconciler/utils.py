@@ -1,4 +1,4 @@
-def normalize_wikidata_id(wikidata_url):
+def normalize_wikidata_id(wikidata_url: str) -> str:
     if wikidata_url[-1] == "/":
         wikidata_url = wikidata_url[:-1]
     wiki_id = wikidata_url.split("/")[-1]
