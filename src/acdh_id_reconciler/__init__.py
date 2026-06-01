@@ -15,6 +15,7 @@ WIKIAPI_URL = (
 REQUEST_TIMEOUT_SECONDS = float(
     os.getenv("ACDH_ID_RECONCILER_REQUEST_TIMEOUT_SECONDS", "30")
 )
+DEBUG = os.getenv("ACDH_ID_RECONCILER_DEBUG", False)
 ReconciliationResult = dict[str, str]
 
 
@@ -33,7 +34,8 @@ def _run_wikidata_api_query(
         timeout=REQUEST_TIMEOUT_SECONDS,
     )
     response.raise_for_status()
-    print(response.url)
+    if DEBUG:
+        print(response.url)
     return response.json()
 
 
@@ -111,9 +113,7 @@ def gnd_to_wikidata(gnd: str, user_agent: str = USER_AGENT) -> ReconciliationRes
     if not qid:
         return {}
 
-    entity = _entity_by_qid(qid, user_agent=user_agent, props="claims")
-    gnd_value = _first_claim(entity, "P227") or norm_id
-    return {"wikidata": _qid_to_uri(qid), "gnd": gnd_value}
+    return {"wikidata": _qid_to_uri(qid), "gnd": norm_id}
 
 
 def gnd_to_geonames(gnd: str, user_agent: str = USER_AGENT) -> ReconciliationResult:
@@ -164,9 +164,7 @@ def geonames_to_wikidata(
     if not qid:
         return {}
 
-    entity = _entity_by_qid(qid, user_agent=user_agent, props="claims")
-    geonames_value = _first_claim(entity, "P1566") or norm_id
-    return {"wikidata": _qid_to_uri(qid), "geonames": geonames_value}
+    return {"wikidata": _qid_to_uri(qid), "geonames": norm_id}
 
 
 def wikidata_to_wikipedia(
